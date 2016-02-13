@@ -26,12 +26,15 @@
 	<div ng-controller="dataController">
 		<p>Upload XLSX file here:</p>
 		<input type="file" id="file" name="file">
-		<input type="submit" value="Parse" ng-click="newFile()">		
-		<table ng-repeat="spreadsheet in datum">
+		<input type="submit" value="Parse" ng-click="newFile()">	
+		<div class="workbook" ng-repeat="workbook in datum ">
+			<table ng-repeat="sheet in workbook">
 			<thead>
-				<td ng-repeat="content in spreadsheet track by $index" ng-bind="content"></td>
+				<td ng-repeat="(header, values) in sheet track by $index" ng-bind="header"></td>
 			</thead>
+			<td></td>
 		</table>
+		</div>	
 	</div>
 </body>
 </html>

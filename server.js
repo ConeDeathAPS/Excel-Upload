@@ -10,18 +10,18 @@ mongoose.connect("mongodb://localhost/excelUpload");
 
 app.use(express.static(__dirname + "/static"));
 app.use(bodyParser.json({extended: true}));
-var DataSchema = new mongoose.Schema({
-	data: Array
+var ExcelDocument = new mongoose.Schema({
+	data: Object
 });
 
-var Data = mongoose.model("data", DataSchema);
+var Spreadsheet = mongoose.model("spreadsheet", ExcelDocument);
 
 app.get("/", function (req, res) {
 	res.sendfile('index.html');
 })
 
 app.get("/data", function (req, res) {
-	Data.find({}, function(err, datum) {
+	Spreadsheet.find({}, function(err, datum) {
 		if (!err) {
 			console.log("First lookup", datum);
 			res.json(datum);
@@ -33,7 +33,7 @@ app.get("/data", function (req, res) {
 
 app.post("/data", function (req, res) {
 	console.log(req.body);
-	var newData = new Data({data: req.body});
+	var newData = new Spreadsheet({data: req.body});
 	newData.save(function (err) {
 		if (!err) {
 			console.log("Database addition success!");
