@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularExcel">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular and Excel</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="angular-route.min.js"></script>
+	<script type="text/javascript" src="xlsx.core.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+
+	</script>
+	<style type="text/css">
+	* {
+		padding: 0px;
+		margin: 0px;
+	}
+	input {
+		display: block;
+		margin: 10px 20px;
+	}
+	</style>
+</head>
+<body>
+	<div ng-controller="dataController">
+		<p>Upload XLSX file here:</p>
+		<input type="file" id="file" name="file">
+		<input type="submit" value="Parse" ng-click="newFile()">		
+		<table ng-repeat="spreadsheet in datum">
+			<thead>
+				<td ng-repeat="content in spreadsheet track by $index" ng-bind="content"></td>
+			</thead>
+		</table>
+	</div>
+</body>
+</html>

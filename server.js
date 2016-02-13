@@ -8,10 +8,8 @@ var mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost/excelUpload");
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + "/static"));
 app.use(bodyParser.json({extended: true}));
-app.set("views", __dirname);
-app.set("view engine", "ejs");
 var DataSchema = new mongoose.Schema({
 	data: Array
 });
@@ -19,7 +17,7 @@ var DataSchema = new mongoose.Schema({
 var Data = mongoose.model("data", DataSchema);
 
 app.get("/", function (req, res) {
-	res.render('index');
+	res.sendfile('index.html');
 })
 
 app.get("/data", function (req, res) {
